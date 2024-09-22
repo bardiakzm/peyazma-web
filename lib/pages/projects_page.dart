@@ -1,8 +1,10 @@
 import 'dart:html';
 import 'dart:ui_web';
-
+import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
+import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:peyazma_web/widgets/option_bar.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -15,7 +17,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   void initState() {
     super.initState();
-    // Registering the iframeElement once in initState for the map
     platformViewRegistry.registerViewFactory(
       'iframeElement',
       (int viewId) => IFrameElement()
@@ -28,23 +29,12 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('پروژه ها'),
-        backgroundColor: const Color(0xFF151C23),
-        actions: [
-          _buildNavButton('خانه', '/'),
-          _buildNavButton('درباره ما', '/about'),
-          _buildNavButton('خدمات ما', '/services'),
-          _buildNavButton('پروژه ها', '/projects'),
-          _buildNavButton('اخبار و اطلاعیه ها', '/news'),
-          _buildNavButton('تماس با ما', '/contact'),
-        ],
-      ),
+      appBar: OptionBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildProjectSection(),
               const SizedBox(height: 32),
@@ -58,23 +48,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
     );
   }
 
-  // Navigation button
-  Widget _buildNavButton(String title, String route) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: TextButton(
-        onPressed: () {
-          // Navigator.pushNamed(context, route);
-        },
-        style: TextButton.styleFrom(
-          foregroundColor: Colors.white,
-        ),
-        child: Text(title),
-      ),
-    );
-  }
-
-  // Project section widget (You can replace this with the project data)
+  // Project section widget
   Widget _buildProjectSection() {
     return Card(
       elevation: 8,
@@ -84,10 +58,11 @@ class _ProjectsPageState extends State<ProjectsPage> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
+            SelectableText(
               'پروژه های ما',
+              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -95,14 +70,122 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Here you can display the list of projects or other content from the page.',
-              style:
-                  TextStyle(fontSize: 16, height: 1.5, color: Colors.grey[800]),
+            // Quality Control Table
+            SelectableText(
+              'پروژه های کنترل کیفیت',
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade700,
+              ),
             ),
+            _buildQualityControlTable(),
+            const SizedBox(height: 16),
+            // Geotechnical Projects Table
+            SelectableText(
+              'پروژه های ژئوتکنیک',
+              textDirection: TextDirection.rtl,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade700,
+              ),
+            ),
+            _buildGeotechnicalProjectsTable(),
           ],
         ),
       ),
+    );
+  }
+
+  // Build Quality Control Table
+  Widget _buildQualityControlTable() {
+    return DataTable(
+      columns: const [
+        DataColumn(
+          label: Align(
+            alignment: Alignment.centerRight,
+            child: SelectableText(
+              'پروژه',
+              textDirection: TextDirection.rtl,
+            ),
+          ),
+        ),
+        DataColumn(
+          label: Align(
+            alignment: Alignment.centerRight,
+            child: SelectableText(
+              'کارفرما',
+              textDirection: TextDirection.rtl,
+            ),
+          ),
+        ),
+      ],
+      rows: qualityControlAndLocalUnitData.map<DataRow>((project) {
+        return DataRow(cells: [
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(
+                project['project'] ?? '',
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ),
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(
+                project['employer'] ?? '',
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ),
+        ]);
+      }).toList(),
+    );
+  }
+
+  // Build Geotechnical Projects Table
+  Widget _buildGeotechnicalProjectsTable() {
+    return DataTable(
+      columns: const [
+        DataColumn(
+          label: SelectableText(
+            'پروژه',
+            textDirection: TextDirection.rtl,
+          ),
+        ),
+        DataColumn(
+          label: SelectableText(
+            'کارفرما',
+            textDirection: TextDirection.rtl,
+          ),
+        ),
+      ],
+      rows: geotechnicalProjects.map<DataRow>((project) {
+        return DataRow(cells: [
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(
+                project['project'] ?? '',
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ),
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(
+                project['employer'] ?? '',
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ),
+        ]);
+      }).toList(),
     );
   }
 
