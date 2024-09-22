@@ -29,7 +29,7 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'درباره ما',
-                  () {/* Add your 'About Us' button action here */},
+                  () => Navigator.pushNamed(context, '/aboutUs'),
                 ),
                 _buildNavButton(
                   context,
@@ -39,7 +39,7 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'پروژه‌ها',
-                  () {/* Add your 'Projects' button action here */},
+                  () => Navigator.pushNamed(context, '/projects'),
                 ),
                 _buildNavButton(
                   context,
