@@ -13,90 +13,73 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: const Color(0xFF151C23),
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/contactUs');
-              },
-              child: const Text(
-                'تماس با ما',
-                style: TextStyle(color: Colors.white),
-              ),
+          Expanded(
+            child: Wrap(
+              spacing: 16.0, // Space between items
+              alignment: WrapAlignment.end,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                _buildNavButton(
+                  context,
+                  'تماس با ما',
+                  () => Navigator.pushNamed(context, '/contactUs'),
+                ),
+                _buildNavButton(
+                  context,
+                  'درباره ما',
+                  () {/* Add your 'About Us' button action here */},
+                ),
+                _buildNavButton(
+                  context,
+                  'اخبار و اطلاعات',
+                  () {/* Add your 'News and Info' button action here */},
+                ),
+                _buildNavButton(
+                  context,
+                  'پروژه‌ها',
+                  () {/* Add your 'Projects' button action here */},
+                ),
+                _buildNavButton(
+                  context,
+                  'خدمات ما',
+                  () {/* Add your 'Services' button action here */},
+                ),
+                _buildNavButton(
+                  context,
+                  'خانه',
+                  () => Navigator.pushReplacementNamed(context, '/'),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: Icon(
+                    Icons.engineering,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // Add your 'About Us' button action here
-              },
-              child: const Text(
-                'درباره ما',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // Add your 'News and Info' button action here
-              },
-              child: const Text(
-                'اخبار و اطلاعات',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // Add your 'Projects' button action here
-              },
-              child: const Text(
-                'پروژه‌ها',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // Add your 'Services' button action here
-              },
-              child: const Text(
-                'خدمات ما',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () {
-                // Add your 'Home' button action here
-                Navigator.pushReplacementNamed(context, '/');
-              },
-              child: const Text(
-                'خانه',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 16),
-            child: Icon(
-              Icons.engineering,
-              color: Colors.white,
-              size: 50,
-            ),
-          ), // Placeholder for the logo
         ],
+      ),
+    );
+  }
+
+  Widget _buildNavButton(
+      BuildContext context, String label, VoidCallback onPressed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
