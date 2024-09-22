@@ -42,6 +42,26 @@ class ContactUs extends StatelessWidget {
                                   color: Colors.grey,
                                   borderRadius: BorderRadius.circular(1.0),
                                 ),
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                  'برای ارتباط با ما از درگاه های زیر اقدام نمایید:')
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ],
