@@ -31,11 +31,11 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                   'درباره ما',
                   () => Navigator.pushNamed(context, '/aboutUs'),
                 ),
-                _buildNavButton(
-                  context,
-                  'اخبار و اطلاعات',
-                  () {/* Add your 'News and Info' button action here */},
-                ),
+                // _buildNavButton(
+                //   context,
+                //   'اخبار و اطلاعات',
+                //   () {/* Add your 'News and Info' button action here */},
+                // ),
                 _buildNavButton(
                   context,
                   'پروژه‌ها',
