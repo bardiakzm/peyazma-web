@@ -57,13 +57,14 @@ flutter:
     - assets/main_image.jpg
     - assets/service1.jpg
     - assets/service2.jpeg
-    - assets/service3.png
     - assets/service4.jpeg
     - assets/service4_2.jpg
     - assets/service4_3.jpg
     - assets/service4_4.jpg
     - assets/service4_5.jpg
     - assets/service4_6.png
+    - assets/service3_upscaled.webp
+    - assets/service3_1.webp
 
 
   # The following line ensures that the Material Icons font is

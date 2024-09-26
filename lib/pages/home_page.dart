@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peyazma_web/resources/consts.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -107,7 +108,7 @@ class HomePage extends StatelessWidget {
                         _buildServiceCard(
                             'خدمت ۱', 'service4_6.png', 'توضیحات خدمت ۱'),
                         _buildServiceCard(
-                            'خدمت ۲', 'service3.png', 'توضیحات خدمت ۲'),
+                            'خدمت ۲', 'service3_1.webp', 'توضیحات خدمت ۲'),
                         _buildServiceCard(
                             'خدمت ۳', 'service2.jpeg', 'توضیحات خدمت ۳'),
                         _buildServiceCard(
@@ -138,12 +139,16 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'شرکت مهندسین مشاور پی آزما کاوان شالوده با داشتن پایه ۳...',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 120, right: 120),
+                      child: Text(
+                        companyDescriptionText,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20, color: Colors.black87, height: 2),
+                      ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
