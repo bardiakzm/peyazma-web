@@ -81,7 +81,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
   Widget _buildAboutSection(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SelectableText(
         textDirection: TextDirection.rtl,
         aboutUsText,

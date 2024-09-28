@@ -74,7 +74,10 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 15),
                         ),
-                        child: const Text('اطلاعات بیشتر'),
+                        child: const Text(
+                          'اطلاعات بیشتر',
+                          style: TextStyle(color: Colors.black87),
+                        ),
                       ),
                     ],
                   ),
@@ -105,14 +108,12 @@ class HomePage extends StatelessWidget {
                       mainAxisSpacing: 20,
                       crossAxisSpacing: 20,
                       children: [
+                        _buildServiceCard('مقاومت مصالح', 'service4_6.png', ''),
                         _buildServiceCard(
-                            'خدمت ۱', 'service4_6.png', 'توضیحات خدمت ۱'),
+                            'آزمایش‌های بتن', 'service3_1.webp', ''),
                         _buildServiceCard(
-                            'خدمت ۲', 'service3_1.webp', 'توضیحات خدمت ۲'),
-                        _buildServiceCard(
-                            'خدمت ۳', 'service2.jpeg', 'توضیحات خدمت ۳'),
-                        _buildServiceCard(
-                            'خدمت ۴', 'service1.jpg', 'توضیحات خدمت ۴'),
+                            'آزمایشگاه محلی', 'service2.jpeg', ''),
+                        _buildServiceCard('خدمات ژئوتکنیک', 'service1.jpg', ''),
                       ],
                     ),
                   ],
@@ -179,7 +180,7 @@ class HomePage extends StatelessWidget {
                         mainAxisSpacing: 20,
                         crossAxisSpacing: 20,
                         children: [
-                          _buildClientLogo('assets/client1.png'),
+                          _buildClientLogo('assets/employers/1.webp'),
                           _buildClientLogo('assets/client2.png'),
                           _buildClientLogo('assets/client3.png'),
                           _buildClientLogo('assets/client4.png'),
