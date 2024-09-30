@@ -193,11 +193,11 @@ class HomePage extends StatelessWidget {
                       child: Swiper(
                         itemBuilder: (BuildContext context, int index) {
                           return Image.asset(
-                            'assets/employers/1.webp',
+                            'assets/employers/${index + 1}.webp',
                             fit: BoxFit.contain,
                           );
                         },
-                        itemCount: 3,
+                        itemCount: 25,
                         pagination: const SwiperPagination(),
                         control: const SwiperControl(),
                       ),
