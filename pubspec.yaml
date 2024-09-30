@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   url_launcher: ^6.3.0
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,30 @@ flutter:
     - assets/service3_upscaled.webp
     - assets/service3_1.webp
     - assets/employers/1.webp
+    - assets/employers/2.webp
+    - assets/employers/3.webp
+    - assets/employers/4.webp
+    - assets/employers/5.webp
+    - assets/employers/6.webp
+    - assets/employers/7.webp
+    - assets/employers/8.webp
+    - assets/employers/9.webp
+    - assets/employers/10.webp
+    - assets/employers/11.webp
+    - assets/employers/12.webp
+    - assets/employers/13.webp
+    - assets/employers/14.webp
+    - assets/employers/15.webp
+    - assets/employers/16.webp
+    - assets/employers/17.webp
+    - assets/employers/18.webp
+    - assets/employers/19.webp
+    - assets/employers/20.webp
+    - assets/employers/21.webp
+    - assets/employers/22.webp
+    - assets/employers/23.webp
+    - assets/employers/24.webp
+    - assets/employers/25.webp
 
 
   # The following line ensures that the Material Icons font is

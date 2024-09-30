@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peyazma_web/resources/consts.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -171,22 +172,36 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    // SizedBox(
+                    //   height: 250, // Set height for logo grid
+                    //   child: GridView.count(
+                    //     crossAxisCount: 4,
+                    //     shrinkWrap: true,
+                    //     // physics: const NeverScrollableScrollPhysics(),
+                    //     mainAxisSpacing: 20,
+                    //     crossAxisSpacing: 20,
+                    //     children: [
+                    //       _buildClientLogo('assets/employers/1.webp'),
+                    //       _buildClientLogo('assets/employers/2.webp'),
+                    //       _buildClientLogo('assets/employers/3.webp'),
+                    //       _buildClientLogo('assets/employers/4.webp'),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
-                      height: 150, // Set height for logo grid
-                      child: GridView.count(
-                        crossAxisCount: 4,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        children: [
-                          _buildClientLogo('assets/employers/1.webp'),
-                          _buildClientLogo('assets/client2.png'),
-                          _buildClientLogo('assets/client3.png'),
-                          _buildClientLogo('assets/client4.png'),
-                        ],
+                      height: 250,
+                      child: Swiper(
+                        itemBuilder: (BuildContext context, int index) {
+                          return Image.asset(
+                            'assets/employers/1.webp',
+                            fit: BoxFit.contain,
+                          );
+                        },
+                        itemCount: 3,
+                        pagination: const SwiperPagination(),
+                        control: const SwiperControl(),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
