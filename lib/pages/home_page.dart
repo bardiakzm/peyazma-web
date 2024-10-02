@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                     //   ),
                     // ),
                     SizedBox(
-                      height: 250,
+                      height: 280,
                       child: Swiper(
                         itemBuilder: (BuildContext context, int index) {
                           return Image.asset(
@@ -197,6 +197,7 @@ class HomePage extends StatelessWidget {
                             fit: BoxFit.contain,
                           );
                         },
+                        autoplay: true,
                         itemCount: 25,
                         pagination: const SwiperPagination(),
                         control: const SwiperControl(),

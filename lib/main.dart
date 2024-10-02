@@ -3,6 +3,7 @@ import 'package:peyazma_web/pages/about_us_page.dart';
 import 'package:peyazma_web/pages/contact_us_page.dart';
 import 'package:peyazma_web/pages/home_page.dart';
 import 'package:peyazma_web/pages/projects_page.dart';
+import 'transitions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        pageTransitionsTheme: NoTransitionsOnWeb(),
+      ),
       // home: HomePage(),
       initialRoute: const HomePage().navLabel,
       routes: {
