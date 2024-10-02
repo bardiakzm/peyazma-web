@@ -44,7 +44,7 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'خدمات ما',
-                  () {/* Add your 'Services' button action here */},
+                  () => Navigator.pushNamed(context, '/services'),
                 ),
                 _buildNavButton(
                   context,

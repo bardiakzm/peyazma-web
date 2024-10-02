@@ -8,7 +8,7 @@ import 'package:peyazma_web/resources/bottom_page_information.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
-
+  final String navLabel = '/projects';
   @override
   _ProjectsPageState createState() => _ProjectsPageState();
 }

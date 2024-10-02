@@ -4,6 +4,7 @@ import 'package:peyazma_web/pages/contact_us_page.dart';
 import 'package:peyazma_web/pages/home_page.dart';
 import 'package:peyazma_web/pages/projects_page.dart';
 import 'transitions.dart';
+import 'package:peyazma_web/pages/services_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/contactUs': (context) => const ContactUs(), // contact us route
         '/aboutUs': (context) => const AboutUsPage(), // about us route
         '/projects': (context) => const ProjectsPage(), // projects route
+        '/services': (context) => const ServicesPage(), // projects route
       },
     );
   }
