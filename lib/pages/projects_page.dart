@@ -1,131 +1,23 @@
-import 'dart:html';
-import 'dart:ui_web';
+import 'package:flutter/material.dart';
 import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
 import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
-import 'package:flutter/material.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
 import 'package:peyazma_web/resources/bottom_page_information.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
   final String navLabel = '/projects';
+
   @override
   _ProjectsPageState createState() => _ProjectsPageState();
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const OptionBar(),
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildProjectSection(),
-                const SizedBox(height: 32),
-                // buildMapSection(context),
-                // const SizedBox(height: 32),
-                Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: buildContactDetailsSection(context)),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  static const int _rowsPerPage = 10;
 
-  // Build Quality Control Table
-  Widget _buildQualityControlTable() {
-    return DataTable(
-      columns: const [
-        DataColumn(
-          label: Center(
-            // Wrap with Center
-            child: SelectableText(
-              'پروژه',
-              textAlign: TextAlign.center, // Add textAlign
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Center(
-            // Wrap with Center
-            child: SelectableText(
-              'کارفرما',
-              textAlign: TextAlign.center, // Add textAlign
-            ),
-          ),
-        ),
-      ],
-      rows: qualityControlAndLocalUnitData.map<DataRow>((project) {
-        return DataRow(cells: [
-          DataCell(
-            Align(
-              alignment: Alignment.centerRight,
-              child: SelectableText(project['project'] ?? ''),
-            ),
-          ),
-          DataCell(
-            SelectableText(project['employer'] ?? ''),
-          ),
-        ]);
-      }).toList(),
-    );
-  }
+  int _qualityControlCurrentPage = 0;
+  int _geotechnicalCurrentPage = 0;
 
-  // Build Geotechnical Projects Table
-  Widget _buildGeotechnicalProjectsTable() {
-    return DataTable(
-      columns: const [
-        DataColumn(
-          label: Center(
-            // Wrap with Center
-            child: SelectableText(
-              'پروژه',
-              textAlign: TextAlign.center, // Add textAlign
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Center(
-            // Wrap with Center
-            child: SelectableText(
-              'کارفرما',
-              textAlign: TextAlign.center, // Add textAlign
-            ),
-          ),
-        ),
-      ],
-      rows: geotechnicalProjects.map<DataRow>((project) {
-        return DataRow(cells: [
-          DataCell(
-            Align(
-              alignment: Alignment.centerRight,
-              child: SelectableText(
-                project['project'] ?? '',
-                textDirection: TextDirection.rtl,
-              ),
-            ),
-          ),
-          DataCell(
-            SelectableText(
-              project['employer'] ?? '',
-              textDirection: TextDirection.rtl,
-            ),
-          ),
-        ]);
-      }).toList(),
-    );
-  }
-
-  // Performance Optimizations
   late final Future<List<Map<String, String>>> _qualityControlFuture;
   late final Future<List<Map<String, String>>> _geotechnicalProjectsFuture;
 
@@ -135,41 +27,160 @@ class _ProjectsPageState extends State<ProjectsPage> {
     _qualityControlFuture =
         Future.microtask(() => qualityControlAndLocalUnitData);
     _geotechnicalProjectsFuture = Future.microtask(() => geotechnicalProjects);
+  }
 
-    platformViewRegistry.registerViewFactory(
-      'iframeElement',
-      (int viewId) => IFrameElement()
-        ..style.border = 'none'
-        ..src = 'your-map-url',
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const OptionBar(), // Custom OptionBar widget
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: SingleChildScrollView(
+          child: Padding(
+            // padding: const EdgeInsets.only(top: 16.0, right: 400, left: 400),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildProjectSection(),
+                const SizedBox(height: 32),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: buildContactDetailsSection(context),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPaginatedTable({
+    required List<Map<String, String>> data,
+    required int currentPage,
+    required Function(int) onPageChanged,
+    required String emptyTableText,
+  }) {
+    final int totalPages = (data.length / _rowsPerPage).ceil();
+    final int startIndex = currentPage * _rowsPerPage;
+    final int endIndex = (startIndex + _rowsPerPage < data.length)
+        ? startIndex + _rowsPerPage
+        : data.length;
+
+    final List<Map<String, String>> paginatedData =
+        data.sublist(startIndex, endIndex);
+
+    return Column(
+      children: [
+        if (data.isEmpty)
+          Center(child: Text(emptyTableText))
+        else
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              // color: Colors.grey[100],
+            ),
+            child: DataTable(
+              columns: const [
+                DataColumn(
+                  label: Center(
+                    child: SelectableText(
+                      'پروژه',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Center(
+                    child: SelectableText(
+                      'کارفرما',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+              rows: paginatedData.map<DataRow>((project) {
+                return DataRow(cells: [
+                  DataCell(
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: SelectableText(
+                        project['project'] ?? '',
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ),
+                  DataCell(
+                    SelectableText(
+                      project['employer'] ?? '',
+                      textDirection: TextDirection.rtl,
+                    ),
+                  ),
+                ]);
+              }).toList(),
+            ),
+          ),
+        const SizedBox(height: 10),
+        if (totalPages > 1)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.chevron_left),
+                  onPressed: currentPage < totalPages - 1
+                      ? () => onPageChanged(currentPage + 1)
+                      : null,
+                ),
+                Text(
+                  '$totalPages / ${currentPage + 1}',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.chevron_right),
+                  onPressed: currentPage > 0
+                      ? () => onPageChanged(currentPage - 1)
+                      : null,
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 
   Widget _buildProjectSection() {
     return Card(
-      elevation: 8,
+      elevation: 10,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SelectableText(
-              'پروژه های ما',
+              'پروژه‌های ما',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade800,
+                color: Colors.blue.shade900,
               ),
             ),
+            const Divider(),
             const SizedBox(height: 16),
             SelectableText(
-              'پروژه های کنترل کیفیت',
+              'پروژه‌های کنترل کیفیت',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade700,
+                color: Colors.blue.shade800,
               ),
             ),
             FutureBuilder<List<Map<String, String>>>(
@@ -178,16 +189,29 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return _buildQualityControlTable();
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                      child: Text('هیچ پروژه کنترل کیفیتی موجود نیست'));
+                }
+                return _buildPaginatedTable(
+                  data: snapshot.data!,
+                  currentPage: _qualityControlCurrentPage,
+                  onPageChanged: (int newPage) {
+                    setState(() {
+                      _qualityControlCurrentPage = newPage;
+                    });
+                  },
+                  emptyTableText: 'هیچ پروژه کنترل کیفیتی موجود نیست',
+                );
               },
             ),
             const SizedBox(height: 16),
             SelectableText(
-              'پروژه های ژئوتکنیک',
+              'پروژه‌های ژئوتکنیک',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade700,
+                color: Colors.blue.shade800,
               ),
             ),
             FutureBuilder<List<Map<String, String>>>(
@@ -196,7 +220,20 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return _buildGeotechnicalProjectsTable();
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                      child: Text('هیچ پروژه ژئوتکنیکی موجود نیست'));
+                }
+                return _buildPaginatedTable(
+                  data: snapshot.data!,
+                  currentPage: _geotechnicalCurrentPage,
+                  onPageChanged: (int newPage) {
+                    setState(() {
+                      _geotechnicalCurrentPage = newPage;
+                    });
+                  },
+                  emptyTableText: 'هیچ پروژه ژئوتکنیکی موجود نیست',
+                );
               },
             ),
           ],
@@ -205,62 +242,3 @@ class _ProjectsPageState extends State<ProjectsPage> {
     );
   }
 }
-
-// void initState() {
-//   super.initState();
-//   platformViewRegistry.registerViewFactory(
-//     'iframeElement',
-//     (int viewId) => IFrameElement()
-//       ..style.border = 'none'
-//       ..src =
-//           'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.9554804073694!2d51.25466741525996!3d35.68798868019381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQxJzE2LjgiTiA1McKwMTUnMjQuNyJF!5e0!3m2!1sen!2sus!4v1632901234567!5m2!1sen!2sus',
-//   );
-// }
-
-// Project section widget
-// Widget _buildProjectSection() {
-//   return Card(
-//     elevation: 8,
-//     shape: RoundedRectangleBorder(
-//       borderRadius: BorderRadius.circular(16),
-//     ),
-//     child: Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           SelectableText(
-//             'پروژه های ما',
-//             style: TextStyle(
-//               fontSize: 24,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.blue.shade800,
-//             ),
-//           ),
-//           const SizedBox(height: 16),
-//           // Quality Control Table
-//           SelectableText(
-//             'پروژه های کنترل کیفیت',
-//             style: TextStyle(
-//               fontSize: 20,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.blue.shade700,
-//             ),
-//           ),
-//           _buildQualityControlTable(),
-//           const SizedBox(height: 16),
-//           // Geotechnical Projects Table
-//           SelectableText(
-//             'پروژه های ژئوتکنیک',
-//             style: TextStyle(
-//               fontSize: 20,
-//               fontWeight: FontWeight.bold,
-//               color: Colors.blue.shade700,
-//             ),
-//           ),
-//           _buildGeotechnicalProjectsTable(),
-//         ],
-//       ),
-//     ),
-//   );
-// }

@@ -1,308 +1,266 @@
+import 'dart:html';
+import 'dart:ui_web';
+import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
+import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
 import 'package:flutter/material.dart';
-import 'package:peyazma_web/resources/consts.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
-import 'package:card_swiper/card_swiper.dart';
+import 'package:peyazma_web/resources/bottom_page_information.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-  final String navLabel = '/';
+class ProjectsPage extends StatefulWidget {
+  const ProjectsPage({super.key});
+  final String navLabel = '/projects';
+  @override
+  _ProjectsPageState createState() => _ProjectsPageState();
+}
 
+class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const OptionBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildHeroBanner(context),
-            _buildServicesSection(context),
-            _buildWhyChooseUsSection(context),
-            _buildClientsSection(context),
-          ],
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildProjectSection(),
+                const SizedBox(height: 32),
+                // buildMapSection(context),
+                // const SizedBox(height: 32),
+                Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: buildContactDetailsSection(context)),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildHeroBanner(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width > 768 ? 130 : 20,
-      ),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 15,
-                  spreadRadius: 5,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-              image: DecorationImage(
-                image: const AssetImage('main_image.jpg'),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4),
-                  BlendMode.darken,
-                ),
-              ),
+  // Build Quality Control Table
+  Widget _buildQualityControlTable() {
+    return DataTable(
+      columns: const [
+        DataColumn(
+          label: Center(
+            // Wrap with Center
+            child: SelectableText(
+              'پروژه',
+              textAlign: TextAlign.center, // Add textAlign
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'مهندسین مشاور پی آزما کاوان شالوده',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      const Shadow(
-                        blurRadius: 10.0,
-                        color: Colors.black,
-                        offset: Offset(5.0, 5.0),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'ارائه خدمات مهندسی با کیفیت برتر',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white70,
-                    shadows: [
-                      const Shadow(
-                        blurRadius: 8.0,
-                        color: Colors.black,
-                        offset: Offset(4.0, 4.0),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add action for the button
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
-                      vertical: 20,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text(
-                    'اطلاعات بیشتر',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ],
+        ),
+        DataColumn(
+          label: Center(
+            // Wrap with Center
+            child: SelectableText(
+              'کارفرما',
+              textAlign: TextAlign.center, // Add textAlign
             ),
           ),
-        ],
-      ),
+        ),
+      ],
+      rows: qualityControlAndLocalUnitData.map<DataRow>((project) {
+        return DataRow(cells: [
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(project['project'] ?? ''),
+            ),
+          ),
+          DataCell(
+            SelectableText(project['employer'] ?? ''),
+          ),
+        ]);
+      }).toList(),
     );
   }
 
-  Widget _buildServicesSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      color: Colors.grey[100],
-      child: Column(
-        children: [
-          Text(
-            'خدمات شرکت پی آزما کاوان شالوده',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.blue[800],
-                  fontWeight: FontWeight.bold,
-                ),
+  // Build Geotechnical Projects Table
+  Widget _buildGeotechnicalProjectsTable() {
+    return DataTable(
+      columns: const [
+        DataColumn(
+          label: Center(
+            // Wrap with Center
+            child: SelectableText(
+              'پروژه',
+              textAlign: TextAlign.center, // Add textAlign
+            ),
           ),
-          const SizedBox(height: 40),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              int crossAxisCount =
-                  _getServiceGridCrossAxisCount(constraints.maxWidth);
-              return GridView.count(
-                crossAxisCount: crossAxisCount,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                mainAxisSpacing: 30,
-                crossAxisSpacing: 30,
-                childAspectRatio: 0.8,
-                children: [
-                  _buildServiceCard(context, 'مقاومت مصالح', 'service4_6.png',
-                      'خدمات آزمایشگاهی مقاومت مصالح'),
-                  _buildServiceCard(context, 'آزمایش‌های بتن',
-                      'service3_1.webp', 'انجام آزمایش‌های کنترل کیفیت بتن'),
-                  _buildServiceCard(context, 'آزمایشگاه محلی', 'service2.jpeg',
-                      'خدمات آزمایشگاهی در محل پروژه'),
-                  _buildServiceCard(context, 'خدمات ژئوتکنیک', 'service1.jpg',
-                      'مطالعات و آزمایش‌های ژئوتکنیک'),
-                ],
-              );
-            },
+        ),
+        DataColumn(
+          label: Center(
+            // Wrap with Center
+            child: SelectableText(
+              'کارفرما',
+              textAlign: TextAlign.center, // Add textAlign
+            ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildWhyChooseUsSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      color: Colors.green[50],
-      child: Column(
-        children: [
-          Text(
-            'چرا شرکت پی آزما کاوان شالوده؟',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.blue[800],
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          const SizedBox(height: 30),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1000),
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              child: Padding(
-                padding: const EdgeInsets.all(30),
-                child: Text(
-                  companyDescriptionText,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        height: 1.8,
-                        color: Colors.grey[800],
-                      ),
-                ),
+        ),
+      ],
+      rows: geotechnicalProjects.map<DataRow>((project) {
+        return DataRow(cells: [
+          DataCell(
+            Align(
+              alignment: Alignment.centerRight,
+              child: SelectableText(
+                project['project'] ?? '',
+                textDirection: TextDirection.rtl,
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildClientsSection(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      color: Colors.grey[100],
-      child: Column(
-        children: [
-          Text(
-            'برخی از کارفرمایان ما',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.blue[800],
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          const SizedBox(height: 40),
-          SizedBox(
-            height: 300,
-            child: Swiper(
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Image.asset(
-                      'assets/employers/${index + 1}.webp',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                );
-              },
-              autoplay: true,
-              autoplayDelay: 3000,
-              itemCount: 25,
-              pagination: const SwiperPagination(
-                builder: DotSwiperPaginationBuilder(
-                  activeColor: Colors.blue,
-                  color: Colors.grey,
-                ),
-              ),
-              control: const SwiperControl(
-                color: Colors.blue,
-              ),
+          DataCell(
+            SelectableText(
+              project['employer'] ?? '',
+              textDirection: TextDirection.rtl,
             ),
           ),
-        ],
-      ),
+        ]);
+      }).toList(),
     );
   }
 
-  Widget _buildServiceCard(BuildContext context, String title, String imagePath,
-      String description) {
+  // Performance Optimizations
+  late final Future<List<Map<String, String>>> _qualityControlFuture;
+  late final Future<List<Map<String, String>>> _geotechnicalProjectsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _qualityControlFuture =
+        Future.microtask(() => qualityControlAndLocalUnitData);
+    _geotechnicalProjectsFuture = Future.microtask(() => geotechnicalProjects);
+
+    platformViewRegistry.registerViewFactory(
+      'iframeElement',
+      (int viewId) => IFrameElement()
+        ..style.border = 'none'
+        ..src = 'your-map-url',
+    );
+  }
+
+  Widget _buildProjectSection() {
     return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(15)),
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
-                  fit: BoxFit.cover,
-                ),
+      elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SelectableText(
+              'پروژه های ما',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade800,
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    description,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                        ),
-                  ),
-                ],
+            const SizedBox(height: 16),
+            SelectableText(
+              'پروژه های کنترل کیفیت',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade700,
               ),
             ),
-          ),
-        ],
+            FutureBuilder<List<Map<String, String>>>(
+              future: _qualityControlFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return _buildQualityControlTable();
+              },
+            ),
+            const SizedBox(height: 16),
+            SelectableText(
+              'پروژه های ژئوتکنیک',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade700,
+              ),
+            ),
+            FutureBuilder<List<Map<String, String>>>(
+              future: _geotechnicalProjectsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return _buildGeotechnicalProjectsTable();
+              },
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  int _getServiceGridCrossAxisCount(double width) {
-    if (width > 1200) return 4;
-    if (width > 900) return 3;
-    if (width > 600) return 2;
-    return 1;
   }
 }
+
+// void initState() {
+//   super.initState();
+//   platformViewRegistry.registerViewFactory(
+//     'iframeElement',
+//     (int viewId) => IFrameElement()
+//       ..style.border = 'none'
+//       ..src =
+//           'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.9554804073694!2d51.25466741525996!3d35.68798868019381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQxJzE2LjgiTiA1McKwMTUnMjQuNyJF!5e0!3m2!1sen!2sus!4v1632901234567!5m2!1sen!2sus',
+//   );
+// }
+
+// Project section widget
+// Widget _buildProjectSection() {
+//   return Card(
+//     elevation: 8,
+//     shape: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.circular(16),
+//     ),
+//     child: Padding(
+//       padding: const EdgeInsets.all(16.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           SelectableText(
+//             'پروژه های ما',
+//             style: TextStyle(
+//               fontSize: 24,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.blue.shade800,
+//             ),
+//           ),
+//           const SizedBox(height: 16),
+//           // Quality Control Table
+//           SelectableText(
+//             'پروژه های کنترل کیفیت',
+//             style: TextStyle(
+//               fontSize: 20,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.blue.shade700,
+//             ),
+//           ),
+//           _buildQualityControlTable(),
+//           const SizedBox(height: 16),
+//           // Geotechnical Projects Table
+//           SelectableText(
+//             'پروژه های ژئوتکنیک',
+//             style: TextStyle(
+//               fontSize: 20,
+//               fontWeight: FontWeight.bold,
+//               color: Colors.blue.shade700,
+//             ),
+//           ),
+//           _buildGeotechnicalProjectsTable(),
+//         ],
+//       ),
+//     ),
+//   );
+// }
