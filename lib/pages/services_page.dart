@@ -10,45 +10,48 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const OptionBar(),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.blue.shade50,
-              Colors.blue.shade100,
-            ],
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blue.shade50,
+                Colors.blue.shade100,
+              ],
+            ),
           ),
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1200),
-                child: Column(
-                  children: [
-                    _buildHeader(context),
-                    const SizedBox(height: 60),
-                    _buildServiceSection(
-                      context: context,
-                      title: 'مطالعات ژئوتکنیک',
-                      description: researchsText,
-                      imagePath: 'service1.jpg',
-                      isReversed: false,
-                    ),
-                    const SizedBox(height: 80),
-                    _buildServiceSection(
-                      context: context,
-                      title: 'کنترل کیفی بتن',
-                      description: qualityControlText,
-                      imagePath: 'service2.jpeg',
-                      isReversed: true,
-                    ),
-                    const SizedBox(height: 80),
-                    _buildGallery(),
-                  ],
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: Column(
+                    children: [
+                      _buildHeader(context),
+                      const SizedBox(height: 60),
+                      _buildServiceSection(
+                        context: context,
+                        title: 'مطالعات ژئوتکنیک',
+                        description: researchsText,
+                        imagePath: 'service1.jpg',
+                        isReversed: true,
+                      ),
+                      const SizedBox(height: 80),
+                      _buildServiceSection(
+                        context: context,
+                        title: 'کنترل کیفی بتن',
+                        description: qualityControlText,
+                        imagePath: 'service2.jpeg',
+                        isReversed: false,
+                      ),
+                      const SizedBox(height: 80),
+                      _buildGallery(context),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -81,7 +84,6 @@ class ServicesPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 36,
                 ),
-            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           SelectableText(
@@ -89,7 +91,6 @@ class ServicesPage extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.grey.shade600,
                 ),
-            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -171,7 +172,7 @@ class ServicesPage extends StatelessWidget {
     );
   }
 
-  Widget _buildGallery() {
+  Widget _buildGallery(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -186,28 +187,30 @@ class ServicesPage extends StatelessWidget {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'گالری تصاویر',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 24),
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: List.generate(
-              6,
-              (index) => ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: ImageWidgetPlaceholder(
-                    image: AssetImage('gallery_${index + 1}.jpg'),
-                    placeholder: const CircularProgressIndicator(),
+          Center(
+            child: Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children: List.generate(
+                6,
+                (index) => ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: ImageWidgetPlaceholder(
+                      image: AssetImage('gallery_${index + 1}.jpg'),
+                      placeholder: const CircularProgressIndicator(),
+                    ),
                   ),
                 ),
               ),
