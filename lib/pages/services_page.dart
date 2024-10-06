@@ -201,14 +201,15 @@ class ServicesPage extends StatelessWidget {
               spacing: 16,
               runSpacing: 16,
               children: List.generate(
-                6,
+                16,
                 (index) => ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: SizedBox(
                     width: 200,
                     height: 200,
                     child: ImageWidgetPlaceholder(
-                      image: AssetImage('gallery_${index + 1}.jpg'),
+                      fit: BoxFit.contain,
+                      image: AssetImage('assets/lab_images/l${index + 1}.webp'),
                       placeholder: const CircularProgressIndicator(),
                     ),
                   ),

@@ -1,5 +1,3 @@
-import 'dart:html';
-import 'dart:ui_web';
 import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
 import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
 import 'package:flutter/material.dart';

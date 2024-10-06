@@ -5,13 +5,18 @@ class ImageWidgetPlaceholder extends StatelessWidget {
     super.key,
     required this.image,
     required this.placeholder,
+    this.fit = BoxFit.cover, // Added fit with default value
   });
+
   final ImageProvider image;
   final Widget placeholder;
+  final BoxFit fit; // Declared fit property
+
   @override
   Widget build(BuildContext context) {
     return Image(
       image: image,
+      fit: fit, // Applied fit to Image widget
       frameBuilder: (BuildContext context, Widget child, int? frame,
           bool? wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded == true) {

@@ -92,6 +92,22 @@ flutter:
     - assets/employers/23.webp
     - assets/employers/24.webp
     - assets/employers/25.webp
+    - assets/lab_images/l1.webp
+    - assets/lab_images/l2.webp
+    - assets/lab_images/l3.webp
+    - assets/lab_images/l4.webp
+    - assets/lab_images/l5.webp
+    - assets/lab_images/l6.webp
+    - assets/lab_images/l7.webp
+    - assets/lab_images/l8.webp
+    - assets/lab_images/l9.webp
+    - assets/lab_images/l10.webp
+    - assets/lab_images/l11.webp
+    - assets/lab_images/l12.webp
+    - assets/lab_images/l13.webp
+    - assets/lab_images/l14.webp
+    - assets/lab_images/l15.webp
+    - assets/lab_images/l16.webp
 
 
   # The following line ensures that the Material Icons font is
