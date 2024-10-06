@@ -196,21 +196,27 @@ class ServicesPage extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 24),
-          Center(
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              children: List.generate(
-                16,
-                (index) => ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: ImageWidgetPlaceholder(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/lab_images/l${index + 1}.webp'),
-                      placeholder: const CircularProgressIndicator(),
+          Wrap(
+            spacing: 8, // Reduced spacing
+            runSpacing: 8, // Reduced run spacing
+            children: List.generate(
+              16,
+              (index) => SizedBox(
+                width: 80, // Further reduced from 100 to 80
+                height: 80, // Explicit height to match width
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4), // Smaller radius
+                  child: ImageWidgetPlaceholder(
+                    image: AssetImage('assets/lab_images/l${index + 1}.webp'),
+                    fit: BoxFit.cover, // Back to cover for better filling
+                    placeholder: const Center(
+                      child: SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
                     ),
                   ),
                 ),
