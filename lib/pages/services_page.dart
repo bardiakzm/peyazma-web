@@ -45,7 +45,7 @@ class ServicesPage extends StatelessWidget {
                         context: context,
                         title: 'کنترل کیفی بتن',
                         description: qualityControlText,
-                        imagePath: 'service2.jpeg',
+                        imagePath: 'service2_1.webp',
                         isReversed: false,
                       ),
                       const SizedBox(height: 80),
@@ -63,33 +63,36 @@ class ServicesPage extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SelectableText(
             'خدمات ما',
             style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: Colors.blue.shade800,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 36,
+                  color: Colors.blue.shade900,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 40,
                 ),
           ),
           const SizedBox(height: 16),
           SelectableText(
             'ارائه خدمات با کیفیت و تخصصی در حوزه ژئوتکنیک و مصالح ساختمانی',
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.grey.shade600,
+                  fontSize: 18,
                 ),
           ),
         ],
@@ -107,7 +110,7 @@ class ServicesPage extends StatelessWidget {
     final content = [
       Expanded(
         child: Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -127,6 +130,7 @@ class ServicesPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: Colors.blue.shade800,
                       fontWeight: FontWeight.bold,
+                      fontSize: 28,
                     ),
               ),
               const SizedBox(height: 16),
@@ -134,7 +138,8 @@ class ServicesPage extends StatelessWidget {
                 description,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.grey.shade700,
-                      height: 1.6,
+                      height: 1.7,
+                      fontSize: 16,
                     ),
               ),
             ],
@@ -146,6 +151,7 @@ class ServicesPage extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: ImageWidgetPlaceholder(
+            fit: BoxFit.fill,
             image: AssetImage(imagePath),
             placeholder: const CircularProgressIndicator(),
           ),
@@ -193,6 +199,7 @@ class ServicesPage extends StatelessWidget {
             'گالری تصاویر',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
+                  fontSize: 28,
                 ),
           ),
           const SizedBox(height: 24),

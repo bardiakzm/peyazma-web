@@ -58,6 +58,7 @@ flutter:
     - assets/main_image.jpg
     - assets/service1.jpg
     - assets/service2.jpeg
+    - assets/service2_1.webp
     - assets/service4.jpeg
     - assets/service4_2.jpg
     - assets/service4_3.jpg
