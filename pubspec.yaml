@@ -93,7 +93,7 @@ flutter:
     - assets/employers/23.webp
     - assets/employers/24.webp
     - assets/employers/25.webp
-    - assets/lab_images/l1.webp
+#    - assets/lab_images/l1.webp
     - assets/lab_images/l2.webp
     - assets/lab_images/l3.webp
     - assets/lab_images/l4.webp

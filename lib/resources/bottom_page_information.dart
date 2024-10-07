@@ -23,7 +23,7 @@ Widget buildMapSection(BuildContext context) {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text(
+              SelectableText(
                 "موقعیت ما روی نقشه",
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
@@ -60,7 +60,7 @@ Widget buildContactDetailsSection(BuildContext context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
+          SelectableText(
             'اطلاعات تماس',
             style: Theme.of(context)
                 .textTheme
@@ -89,14 +89,14 @@ Widget _buildContactItem(IconData icon, String label, String value) {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Expanded(
-          child: Text(
+          child: SelectableText(
             value,
             style: const TextStyle(fontSize: 16),
             textAlign: TextAlign.right,
           ),
         ),
         const SizedBox(width: 8),
-        Text(
+        SelectableText(
           '$label:',
           style: TextStyle(
             fontSize: 16,
