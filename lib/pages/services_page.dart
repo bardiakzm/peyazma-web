@@ -197,27 +197,30 @@ class ServicesPage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Wrap(
-            spacing: 8, // Reduced spacing
-            runSpacing: 8, // Reduced run spacing
+            alignment: WrapAlignment.start,
+            spacing: 4, // Reduce spacing between images
+            runSpacing: 4,
             children: List.generate(
-              16,
-              (index) => SizedBox(
-                width: 80, // Further reduced from 100 to 80
-                height: 80, // Explicit height to match width
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4), // Smaller radius
+              15,
+              (index) => Container(
+                width: 120, // Square frame size
+                height: 120, // Ensure the same height for a square aspect
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.cover, // Ensures the image fills the container
                   child: ImageWidgetPlaceholder(
-                    image: AssetImage('assets/lab_images/l${index + 1}.webp'),
-                    fit: BoxFit.cover, // Back to cover for better filling
+                    image: AssetImage('assets/lab_images/l${index + 2}.webp'),
                     placeholder: const Center(
                       child: SizedBox(
-                        width: 15,
-                        height: 15,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
                       ),
                     ),
+                    fit: BoxFit.cover, // This is essential to crop and fill
                   ),
                 ),
               ),
