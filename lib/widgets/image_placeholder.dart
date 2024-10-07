@@ -69,3 +69,38 @@ class ImageWidgetPlaceholderWithFrame extends StatelessWidget {
     );
   }
 }
+
+class ImageWidgetPlaceholderWithImageProvider extends StatelessWidget {
+  const ImageWidgetPlaceholderWithImageProvider({
+    super.key,
+    required this.image,
+    required this.placeholder,
+    this.fit = BoxFit.cover,
+  });
+
+  final ImageProvider image;
+  final Widget placeholder;
+  final BoxFit fit;
+
+  // Add this method to get the image provider
+  ImageProvider get imageProvider => image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image(
+      image: image,
+      fit: fit,
+      frameBuilder: (BuildContext context, Widget child, int? frame,
+          bool? wasSynchronouslyLoaded) {
+        if (wasSynchronouslyLoaded == true) {
+          return child;
+        } else {
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: frame != null ? child : placeholder,
+          );
+        }
+      },
+    );
+  }
+}

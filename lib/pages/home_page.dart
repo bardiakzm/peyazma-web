@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:peyazma_web/resources/consts.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:peyazma_web/widgets/image_placeholder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,8 +10,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mainImagePlaceholder = ImageWidgetPlaceholderWithImageProvider(
+      image: const AssetImage('main_image.jpg'),
+      placeholder: Container(color: Colors.grey[300]),
+    );
+
     return Scaffold(
-      appBar: const OptionBar(), // Using the custom OptionBar widget
+      appBar: const OptionBar(),
       body: Container(
         decoration: BoxDecoration(
           color: Colors.grey[300],
@@ -18,7 +24,7 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Existing banner section
+              // Banner section
               Padding(
                 padding: const EdgeInsets.only(left: 130, right: 130),
                 child: Container(
@@ -37,7 +43,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                     image: DecorationImage(
-                      image: const AssetImage('main_image.jpg'),
+                      image: mainImagePlaceholder.imageProvider,
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.4),
@@ -67,13 +73,13 @@ class HomePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
-                          // Add action for the button
-                        },
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
+                            horizontal: 30,
+                            vertical: 15,
+                          ),
                         ),
                         child: const Text(
                           'اطلاعات بیشتر',
@@ -84,9 +90,10 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+
               const SizedBox(height: 40),
 
-              // Existing services section
+              // Services section
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -123,9 +130,7 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              // Add the new sections at the bottom here
-
-              // New Section: "چرا شرکت پی آزما کاوان شالوده؟"
+              // Why Choose Us section
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -147,16 +152,19 @@ class HomePage extends StatelessWidget {
                         companyDescriptionText,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20, color: Colors.black87, height: 2),
+                          fontSize: 20,
+                          color: Colors.black87,
+                          height: 2,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 20),
                   ],
                 ),
               ),
+
               const SizedBox(height: 20),
 
-              // New Section: "برخی از کارفرمایان ما" (Clients Section)
+              // Clients section
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -172,28 +180,18 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    // SizedBox(
-                    //   height: 250, // Set height for logo grid
-                    //   child: GridView.count(
-                    //     crossAxisCount: 4,
-                    //     shrinkWrap: true,
-                    //     // physics: const NeverScrollableScrollPhysics(),
-                    //     mainAxisSpacing: 20,
-                    //     crossAxisSpacing: 20,
-                    //     children: [
-                    //       _buildClientLogo('assets/employers/1.webp'),
-                    //       _buildClientLogo('assets/employers/2.webp'),
-                    //       _buildClientLogo('assets/employers/3.webp'),
-                    //       _buildClientLogo('assets/employers/4.webp'),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 280,
                       child: Swiper(
                         itemBuilder: (BuildContext context, int index) {
-                          return Image.asset(
-                            'assets/employers/${index + 1}.webp',
+                          final imagePlaceholder =
+                              ImageWidgetPlaceholderWithImageProvider(
+                            image: AssetImage(
+                                'assets/employers/${index + 1}.webp'),
+                            placeholder: Container(color: Colors.grey[300]),
+                          );
+                          return Image(
+                            image: imagePlaceholder.imageProvider,
                             fit: BoxFit.contain,
                           );
                         },
@@ -202,7 +200,7 @@ class HomePage extends StatelessWidget {
                         pagination: const SwiperPagination(),
                         control: const SwiperControl(),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -213,8 +211,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Function to build service card
   Widget _buildServiceCard(String title, String imagePath, String description) {
+    final imagePlaceholder = ImageWidgetPlaceholderWithImageProvider(
+      image: AssetImage(imagePath),
+      placeholder: Container(color: Colors.grey[300]),
+    );
+
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -224,8 +226,8 @@ class HomePage extends StatelessWidget {
             child: ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(15)),
-              child: Image.asset(
-                imagePath,
+              child: Image(
+                image: imagePlaceholder.imageProvider,
                 fit: BoxFit.cover,
               ),
             ),
@@ -239,31 +241,18 @@ class HomePage extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  description,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 14),
-                ),
+                if (description.isNotEmpty) ...[
+                  const SizedBox(height: 5),
+                  Text(
+                    description,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  // Function to build client logo
-  Widget _buildClientLogo(String logoPath) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset(
-          logoPath,
-          fit: BoxFit.contain,
-        ),
       ),
     );
   }
