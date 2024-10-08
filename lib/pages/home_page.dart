@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainImagePlaceholder = ImageWidgetPlaceholderWithImageProvider(
-      image: const AssetImage('assets/main_image.jpg'),
+      image: const AssetImage('assets/main/main_image.webp'),
       placeholder: Container(color: Colors.grey[300]),
     );
 
@@ -117,13 +117,13 @@ class HomePage extends StatelessWidget {
                       crossAxisSpacing: 20,
                       children: [
                         _buildServiceCard(
-                            'مقاومت مصالح', 'assets/service4_6.png', ''),
+                            'مقاومت مصالح', 'assets/main/service4_6.png', ''),
+                        _buildServiceCard('آزمایش‌های بتن',
+                            'assets/main/service3_1.webp', ''),
                         _buildServiceCard(
-                            'آزمایش‌های بتن', 'assets/service3_1.webp', ''),
+                            'آزمایشگاه محلی', 'assets/main/service2.jpeg', ''),
                         _buildServiceCard(
-                            'آزمایشگاه محلی', 'assets/service2.jpeg', ''),
-                        _buildServiceCard(
-                            'خدمات ژئوتکنیک', 'assets/service1.jpg', ''),
+                            'خدمات ژئوتکنیک', 'assets/main/service1.jpg', ''),
                       ],
                     ),
                   ],

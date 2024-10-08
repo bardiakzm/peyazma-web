@@ -55,60 +55,9 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/main_image.jpg
-    - assets/service1.jpg
-    - assets/service2.jpeg
-    - assets/service2_1.webp
-    - assets/service4.jpeg
-    - assets/service4_2.jpg
-    - assets/service4_3.jpg
-    - assets/service4_4.jpg
-    - assets/service4_4.jpg
-    - assets/service4_5.jpg
-    - assets/service4_6.png
-    - assets/service3_upscaled.webp
-    - assets/service3_1.webp
-    - assets/employers/1.webp
-    - assets/employers/2.webp
-    - assets/employers/3.webp
-    - assets/employers/4.webp
-    - assets/employers/5.webp
-    - assets/employers/6.webp
-    - assets/employers/7.webp
-    - assets/employers/8.webp
-    - assets/employers/9.webp
-    - assets/employers/10.webp
-    - assets/employers/11.webp
-    - assets/employers/12.webp
-    - assets/employers/13.webp
-    - assets/employers/14.webp
-    - assets/employers/15.webp
-    - assets/employers/16.webp
-    - assets/employers/17.webp
-    - assets/employers/18.webp
-    - assets/employers/19.webp
-    - assets/employers/20.webp
-    - assets/employers/21.webp
-    - assets/employers/22.webp
-    - assets/employers/23.webp
-    - assets/employers/24.webp
-    - assets/employers/25.webp
-#    - assets/lab_images/l1.webp
-    - assets/lab_images/l2.webp
-    - assets/lab_images/l3.webp
-    - assets/lab_images/l4.webp
-    - assets/lab_images/l5.webp
-    - assets/lab_images/l6.webp
-    - assets/lab_images/l7.webp
-    - assets/lab_images/l8.webp
-    - assets/lab_images/l9.webp
-    - assets/lab_images/l10.webp
-    - assets/lab_images/l11.webp
-    - assets/lab_images/l12.webp
-    - assets/lab_images/l13.webp
-    - assets/lab_images/l14.webp
-    - assets/lab_images/l15.webp
-    - assets/lab_images/l16.webp
+    - assets/main/
+    - assets/employers/
+    - assets/lab_images/
 
 
   # The following line ensures that the Material Icons font is
