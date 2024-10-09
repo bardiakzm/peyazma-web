@@ -18,9 +18,6 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     statisticsAnimationNotifier.value = false;
-    for (int i = 1; i <= 25; i++) {
-      precacheImage(AssetImage('assets/employers/$i.webp'), context);
-    }
   }
 
   @override
@@ -195,11 +192,11 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
 
               // Clients section
-              // Clients section
               Container(
                 width: double.infinity,
                 color: Colors.grey[300],
-                padding: const EdgeInsets.symmetric(vertical: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -218,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                     ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 400),
                       child: Swiper(
-                        key: UniqueKey(),
+                        // key: UniqueKey(),
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -240,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                   fit: StackFit.expand,
                                   children: [
                                     ImageWidgetPlaceholderWithImageProvider(
-                                      key: UniqueKey(),
+                                      // key: UniqueKey(),
                                       image: AssetImage(
                                           'assets/employers/${index + 1}.webp'),
                                       placeholder: Container(
@@ -299,11 +296,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              // const SizedBox(height: 20),
               const FeaturesSection(),
-              // const SizedBox(
-              //   height: 10,
-              // ),
               const StatisticsSection(),
               const SizedBox(height: 20),
             ],
