@@ -3,6 +3,8 @@ import 'package:peyazma_web/resources/consts.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:peyazma_web/widgets/image_placeholder.dart';
+import 'package:peyazma_web/widgets/features_section.dart';
+import 'package:peyazma_web/widgets/statistics_section.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +16,7 @@ class HomePage extends StatelessWidget {
       image: const AssetImage('assets/main/main_image.webp'),
       placeholder: Container(color: Colors.grey[300]),
     );
-
+    final ScrollController _scrollController = ScrollController();
     return Scaffold(
       appBar: const OptionBar(),
       body: Container(
@@ -22,6 +24,7 @@ class HomePage extends StatelessWidget {
           color: Colors.grey[300],
         ),
         child: SingleChildScrollView(
+          controller: _scrollController,
           child: Column(
             children: [
               // Banner section
@@ -73,7 +76,14 @@ class HomePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _scrollController.animateTo(
+                            _scrollController.position.maxScrollExtent,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                          );
+                          // Navigator.pushNamed(context, '/services');
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           padding: const EdgeInsets.symmetric(
@@ -109,34 +119,39 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    GridView.count(
-                      crossAxisCount: 4,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20,
-                      children: [
-                        _buildServiceCard(
-                            'مقاومت مصالح', 'assets/main/service4_6.png', ''),
-                        _buildServiceCard('آزمایش‌های بتن',
-                            'assets/main/service3_1.webp', ''),
-                        _buildServiceCard(
-                            'آزمایشگاه محلی', 'assets/main/service2.jpeg', ''),
-                        _buildServiceCard(
-                            'خدمات ژئوتکنیک', 'assets/main/service1.jpg', ''),
-                      ],
+                    SizedBox(
+                      height: 400,
+                      child: GridView.count(
+                        crossAxisCount: 4,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                        children: [
+                          _buildServiceCard(
+                              'مقاومت مصالح', 'assets/main/service4_6.png', ''),
+                          _buildServiceCard('آزمایش‌های بتن',
+                              'assets/main/service3_1.webp', ''),
+                          _buildServiceCard('آزمایشگاه محلی',
+                              'assets/main/service2.jpeg', ''),
+                          _buildServiceCard(
+                              'خدمات ژئوتکنیک', 'assets/main/service1.jpg', ''),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 40),
+              // const SizedBox(height: 40),
 
               // Why Choose Us section
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                color: Colors.green[100],
+                // color: Colors.green[100],
+                // color: Colors.lightBlue[50],
+                color: Colors.grey[300],
                 child: Column(
                   children: [
                     Text(
@@ -170,7 +185,8 @@ class HomePage extends StatelessWidget {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                color: Colors.grey[200],
+                color: Colors.grey[300],
+                // color: Colors.lightBlue[50],
                 child: Column(
                   children: [
                     Text(
@@ -181,31 +197,98 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    // const SizedBox(height: 20),
                     SizedBox(
-                      height: 280,
+                      height: 400, // Increased from 280
                       child: Swiper(
                         itemBuilder: (BuildContext context, int index) {
-                          final imagePlaceholder =
-                              ImageWidgetPlaceholderWithImageProvider(
-                            image: AssetImage(
-                                'assets/employers/${index + 1}.webp'),
-                            placeholder: Container(color: Colors.grey[300]),
-                          );
-                          return Image(
-                            image: imagePlaceholder.imageProvider,
-                            fit: BoxFit.contain,
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 8), // Slightly increased margin
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  ImageWidgetPlaceholderWithImageProvider(
+                                    image: AssetImage(
+                                        'assets/employers/${index + 1}.webp'),
+                                    placeholder: Container(
+                                      color: Colors.grey[50],
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.blue[300],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                          Colors.blue[300]!.withOpacity(0.5),
+                                          Colors.transparent,
+                                        ],
+                                        stops: const [0.0, 0.7],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           );
                         },
                         autoplay: true,
+                        autoplayDelay: 5000,
+                        duration: 800,
                         itemCount: 25,
-                        pagination: const SwiperPagination(),
-                        control: const SwiperControl(),
+                        scale: 0.95, // Slightly increased scale
+                        viewportFraction: 0.8,
+                        pagination: SwiperPagination(
+                          margin: const EdgeInsets.only(
+                              bottom: 30), // Increased margin
+                          builder: DotSwiperPaginationBuilder(
+                            color: Colors.grey[300],
+                            activeColor: Colors.blue[400],
+                            size: 10.0, // Slightly larger dots
+                            activeSize: 12.0,
+                            space: 5.0,
+                          ),
+                        ),
+                        control: SwiperControl(
+                          color: Colors.blue[400],
+                          disableColor: Colors.grey[300],
+                          padding:
+                              const EdgeInsets.all(20), // Increased padding
+                          iconPrevious:
+                              Icons.arrow_back_ios_rounded, // More modern icons
+                          iconNext: Icons.arrow_forward_ios_rounded,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              // const SizedBox(height: 20),
+              const FeaturesSection(),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              const StatisticsSection(),
+              const SizedBox(height: 20),
             ],
           ),
         ),

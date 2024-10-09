@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   url_launcher: ^6.3.0
   card_swiper: ^3.0.1
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ flutter:
     - assets/main/
     - assets/employers/
     - assets/lab_images/
+    - assets/logos/
 
 
   # The following line ensures that the Material Icons font is
