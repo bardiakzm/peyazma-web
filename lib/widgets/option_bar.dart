@@ -49,8 +49,7 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'خانه',
-                  () => Navigator.pushNamedAndRemoveUntil(
-                      context, '/', (route) => false),
+                  () => Navigator.pushNamed(context, '/'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 16),

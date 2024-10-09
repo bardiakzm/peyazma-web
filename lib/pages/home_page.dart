@@ -18,6 +18,9 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     statisticsAnimationNotifier.value = false;
+    for (int i = 1; i <= 25; i++) {
+      precacheImage(AssetImage('assets/employers/$i.webp'), context);
+    }
   }
 
   @override
