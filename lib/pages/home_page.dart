@@ -6,9 +6,19 @@ import 'package:peyazma_web/widgets/image_placeholder.dart';
 import 'package:peyazma_web/widgets/features_section.dart';
 import 'package:peyazma_web/widgets/statistics_section.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
   final String navLabel = '/';
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    statisticsAnimationNotifier.value = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +26,7 @@ class HomePage extends StatelessWidget {
       image: const AssetImage('assets/main/main_image.webp'),
       placeholder: Container(color: Colors.grey[300]),
     );
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
     return Scaffold(
       appBar: const OptionBar(),
       body: Container(
@@ -24,7 +34,7 @@ class HomePage extends StatelessWidget {
           color: Colors.grey[300],
         ),
         child: SingleChildScrollView(
-          controller: _scrollController,
+          controller: scrollController,
           child: Column(
             children: [
               // Banner section
@@ -77,8 +87,8 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
-                          _scrollController.animateTo(
-                            _scrollController.position.maxScrollExtent,
+                          scrollController.animateTo(
+                            scrollController.position.maxScrollExtent,
                             duration: const Duration(seconds: 1),
                             curve: Curves.easeInOut,
                           );
@@ -182,71 +192,78 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Clients section
+              // Clients section
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                width: double.infinity,
                 color: Colors.grey[300],
-                // color: Colors.lightBlue[50],
+                padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'برخی از کارفرمایان ما',
-                      style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.blue[800],
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'برخی از کارفرمایان ما',
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.blue[800],
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    // const SizedBox(height: 20),
-                    SizedBox(
-                      height: 400, // Increased from 280
+                    const SizedBox(height: 20),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 400),
                       child: Swiper(
+                        key: UniqueKey(),
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 8), // Slightly increased margin
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  ImageWidgetPlaceholderWithImageProvider(
-                                    image: AssetImage(
-                                        'assets/employers/${index + 1}.webp'),
-                                    placeholder: Container(
-                                      color: Colors.grey[50],
-                                      child: Center(
-                                        child: CircularProgressIndicator(
-                                          color: Colors.blue[300],
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Stack(
+                                  fit: StackFit.expand,
+                                  children: [
+                                    ImageWidgetPlaceholderWithImageProvider(
+                                      key: UniqueKey(),
+                                      image: AssetImage(
+                                          'assets/employers/${index + 1}.webp'),
+                                      placeholder: Container(
+                                        color: Colors.grey[50],
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.blue[300],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                        colors: [
-                                          Colors.blue[300]!.withOpacity(0.5),
-                                          Colors.transparent,
-                                        ],
-                                        stops: const [0.0, 0.7],
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                          colors: [
+                                            Colors.blue[300]!.withOpacity(0.5),
+                                            Colors.transparent,
+                                          ],
+                                          stops: const [0.0, 0.7],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -255,15 +272,14 @@ class HomePage extends StatelessWidget {
                         autoplayDelay: 5000,
                         duration: 800,
                         itemCount: 25,
-                        scale: 0.95, // Slightly increased scale
+                        scale: 0.95,
                         viewportFraction: 0.8,
                         pagination: SwiperPagination(
-                          margin: const EdgeInsets.only(
-                              bottom: 30), // Increased margin
+                          margin: const EdgeInsets.only(bottom: 30),
                           builder: DotSwiperPaginationBuilder(
                             color: Colors.grey[300],
                             activeColor: Colors.blue[400],
-                            size: 10.0, // Slightly larger dots
+                            size: 10.0,
                             activeSize: 12.0,
                             space: 5.0,
                           ),
@@ -271,10 +287,8 @@ class HomePage extends StatelessWidget {
                         control: SwiperControl(
                           color: Colors.blue[400],
                           disableColor: Colors.grey[300],
-                          padding:
-                              const EdgeInsets.all(20), // Increased padding
-                          iconPrevious:
-                              Icons.arrow_back_ios_rounded, // More modern icons
+                          padding: const EdgeInsets.all(20),
+                          iconPrevious: Icons.arrow_back_ios_rounded,
                           iconNext: Icons.arrow_forward_ios_rounded,
                         ),
                       ),

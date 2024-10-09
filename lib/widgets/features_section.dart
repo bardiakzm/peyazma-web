@@ -56,8 +56,9 @@ class FeaturesSection extends StatelessWidget {
       {
         'icon': Icons.update,
         'title': 'تجهیزات به روز',
-        'description':
-            'سیاست شرکت پی آزما کاوان شالوده در بخش تحقیق و توسعه خود آن است که همواره از به روزترین تجهیزات به منظور ارائه هرچه بهتر و سریعتر خدمات خود استفاده نمایند.'
+        'description': '''
+سیاست شرکت پی آزما کاوان شالوده در بخش تحقیق و توسعه خود آن است که همواره از به روزترین تجهیزات به منظور ارائه هرچه بهتر و سریعتر خدمات خود استفاده نمایند.
+'''
       },
       {
         'icon': Icons.speed,
@@ -93,7 +94,8 @@ class FeaturesSection extends StatelessWidget {
                           color: Colors.blue[800],
                         ),
                         const SizedBox(height: 15),
-                        Text(
+                        SelectableText(
+                          textDirection: TextDirection.rtl,
                           feature['title'] as String,
                           style: const TextStyle(
                             fontSize: 20,
@@ -102,7 +104,8 @@ class FeaturesSection extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 10),
-                        Text(
+                        SelectableText(
+                          textDirection: TextDirection.rtl,
                           feature['description'] as String,
                           style: const TextStyle(
                             fontSize: 14,
