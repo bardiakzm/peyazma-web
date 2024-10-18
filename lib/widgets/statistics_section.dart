@@ -9,7 +9,6 @@ class StatisticsSection extends StatelessWidget {
     return VisibilityDetector(
       key: const Key('statistics-section'),
       onVisibilityChanged: (visibilityInfo) {
-        // You can adjust this threshold as needed
         if (visibilityInfo.visibleFraction > 0.3) {
           // Notify all AnimatedStatCards to start their animations
           statisticsAnimationNotifier.value = true;
@@ -89,11 +88,11 @@ class AnimatedStatCard extends StatefulWidget {
   final String prefix;
 
   const AnimatedStatCard({
-    Key? key,
+    super.key,
     required this.targetNumber,
     required this.label,
     required this.prefix,
-  }) : super(key: key);
+  });
 
   @override
   AnimatedStatCardState createState() => AnimatedStatCardState();

@@ -33,9 +33,8 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           color: Colors.grey[300],
         ),
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
+        child: ListView(controller: scrollController, children: [
+          Column(
             children: [
               // Banner section
               Padding(
@@ -301,7 +300,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
             ],
           ),
-        ),
+        ]),
       ),
     );
   }
