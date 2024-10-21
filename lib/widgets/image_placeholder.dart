@@ -89,7 +89,6 @@ class ImageWidgetPlaceholderWithImageProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image(
       image: image,
-      fit: fit,
       frameBuilder: (BuildContext context, Widget child, int? frame,
           bool? wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded == true) {

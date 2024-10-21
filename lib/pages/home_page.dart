@@ -237,6 +237,7 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     ImageWidgetPlaceholderWithImageProvider(
                                       // key: UniqueKey(),
+
                                       image: AssetImage(
                                           'assets/employers/${index + 1}.webp'),
                                       placeholder: Container(
