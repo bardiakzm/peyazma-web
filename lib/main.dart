@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:peyazma_web/pages/about_us_page.dart';
 import 'package:peyazma_web/pages/contact_us_page.dart';
 import 'package:peyazma_web/pages/home_page.dart';
@@ -8,6 +9,7 @@ import 'package:peyazma_web/pages/services_page.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(const MyApp());
 }
 
