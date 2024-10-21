@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OptionBar extends StatelessWidget implements PreferredSizeWidget {
   const OptionBar({
@@ -24,12 +25,12 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'تماس با ما',
-                  () => Navigator.pushNamed(context, '/contactUs'),
+                  () => context.go('/contactUs'),
                 ),
                 _buildNavButton(
                   context,
                   'درباره ما',
-                  () => Navigator.pushNamed(context, '/aboutUs'),
+                  () => context.go('/aboutUs'),
                 ),
                 // _buildNavButton(
                 //   context,
@@ -39,17 +40,17 @@ class OptionBar extends StatelessWidget implements PreferredSizeWidget {
                 _buildNavButton(
                   context,
                   'پروژه‌ها',
-                  () => Navigator.pushNamed(context, '/projects'),
+                  () => context.go('/projects'),
                 ),
                 _buildNavButton(
                   context,
                   'خدمات ما',
-                  () => Navigator.pushNamed(context, '/services'),
+                  () => context.go('/services'),
                 ),
                 _buildNavButton(
                   context,
                   'خانه',
-                  () => Navigator.pushNamed(context, '/'),
+                  () => context.go('/'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 16),

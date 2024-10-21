@@ -5,6 +5,7 @@ import 'package:peyazma_web/pages/home_page.dart';
 import 'package:peyazma_web/pages/projects_page.dart';
 import 'transitions.dart';
 import 'package:peyazma_web/pages/services_page.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,21 +16,47 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final GoRouter router = GoRouter(
+      initialLocation: '/',
+      routes: [
+        GoRoute(
+          path: '/',
+          name: 'home',
+          builder: (context, state) => const HomePage(),
+        ),
+        // GoRoute(
+        //   path: '/home',
+        //   name: 'home',
+        //   builder: (context, state) => const HomePage(),
+        // ),
+        GoRoute(
+          path: '/contactUs',
+          name: 'contactUs',
+          builder: (context, state) => const ContactUs(),
+        ),
+        GoRoute(
+          path: '/aboutUs',
+          name: 'aboutUs',
+          builder: (context, state) => const AboutUsPage(),
+        ),
+        GoRoute(
+          path: '/projects',
+          name: 'projects',
+          builder: (context, state) => const ProjectsPage(),
+        ),
+        GoRoute(
+          path: '/services',
+          name: 'services',
+          builder: (context, state) => const ServicesPage(),
+        ),
+      ],
+    );
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         pageTransitionsTheme: NoTransitionsOnWeb(),
       ),
-      // home: HomePage(),
-      initialRoute: const HomePage().navLabel,
-      routes: {
-        '/': (context) => const HomePage(), // Root route
-        '/home': (context) => const HomePage(), // home route
-        '/contactUs': (context) => const ContactUs(), // contact us route
-        '/aboutUs': (context) => const AboutUsPage(), // about us route
-        '/projects': (context) => const ProjectsPage(), // projects route
-        '/services': (context) => const ServicesPage(), // projects route
-      },
+      routerConfig: router,
     );
   }
 }

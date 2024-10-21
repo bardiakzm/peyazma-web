@@ -9,7 +9,7 @@ class StatisticsSection extends StatelessWidget {
     return VisibilityDetector(
       key: const Key('statistics-section'),
       onVisibilityChanged: (visibilityInfo) {
-        if (visibilityInfo.visibleFraction > 0.3) {
+        if (visibilityInfo.visibleFraction > 0.2) {
           // Notify all AnimatedStatCards to start their animations
           statisticsAnimationNotifier.value = true;
         }
