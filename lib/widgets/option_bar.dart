@@ -78,6 +78,9 @@ class _OptionBarState extends State<OptionBar> {
                       _hideDropdown();
                     },
                   ),
+                  const SizedBox(
+                    height: 5,
+                  ),
                 ],
               ),
             ),
@@ -213,17 +216,16 @@ class _OptionBarState extends State<OptionBar> {
                       () => context.go('/'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 24),
+                      padding: const EdgeInsets.only(left: 16),
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
                           Icons.engineering,
                           color: Colors.white,
-                          size: 40,
+                          size: 45,
                         ),
                       ),
                     ),
@@ -277,7 +279,7 @@ class _OptionBarState extends State<OptionBar> {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
           child: Text(
             label,
             style: const TextStyle(
