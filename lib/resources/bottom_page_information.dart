@@ -51,8 +51,9 @@ Widget buildMapSection(BuildContext context) {
 }
 
 // Contact details section
-Widget buildContactDetailsSection(BuildContext context) {
+Widget buildContactDetailsSection(BuildContext context, Color backgroundColor) {
   return Card(
+    color: backgroundColor,
     elevation: 4,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     child: Padding(

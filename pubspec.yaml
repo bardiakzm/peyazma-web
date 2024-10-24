@@ -64,6 +64,7 @@ flutter:
     - assets/employers/
     - assets/lab_images/
     - assets/logos/
+    - assets/staff/
 
 
   # The following line ensures that the Material Icons font is

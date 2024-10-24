@@ -100,7 +100,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
       children: [
         buildMapSection(context),
         const SizedBox(height: 24),
-        buildContactDetailsSection(context),
+        buildContactDetailsSection(context, Colors.white),
       ],
     );
   }

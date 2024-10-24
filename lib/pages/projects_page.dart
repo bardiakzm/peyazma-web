@@ -46,7 +46,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 const SizedBox(height: 32),
                 Directionality(
                   textDirection: TextDirection.ltr,
-                  child: buildContactDetailsSection(context),
+                  child: buildContactDetailsSection(context, Colors.white),
                 ),
               ],
             ),

@@ -28,281 +28,274 @@ class _HomePageState extends State<HomePage> {
     );
     final ScrollController scrollController = ScrollController();
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: const OptionBar(),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-        ),
-        child: ListView(controller: scrollController, children: [
-          Column(
-            children: [
-              // Banner section
-              Padding(
-                padding: const EdgeInsets.only(left: 130, right: 130),
-                child: Container(
-                  height: 440,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 15,
-                        spreadRadius: 5,
-                        offset: const Offset(0, 10),
-                      ),
-                    ],
-                    image: DecorationImage(
-                      image: mainImagePlaceholder.imageProvider,
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.4),
-                        BlendMode.darken,
-                      ),
-                    ),
+      body: ListView(controller: scrollController, children: [
+        Column(
+          children: [
+            // Banner section
+            Padding(
+              padding: const EdgeInsets.only(left: 130, right: 130),
+              child: Container(
+                height: 440,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
                   ),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'مهندسین مشاور پی آزما کاوان شالوده',
-                        style: TextStyle(
-                          fontSize: 36,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.black,
-                              offset: Offset(5.0, 5.0),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          scrollController.animateTo(
-                            scrollController.position.maxScrollExtent,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut,
-                          );
-                          // Navigator.pushNamed(context, '/services');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 15,
-                          ),
-                        ),
-                        child: const Text(
-                          'اطلاعات بیشتر',
-                          style: TextStyle(color: Colors.black87),
-                        ),
-                      ),
-                    ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 15,
+                      spreadRadius: 5,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                  image: DecorationImage(
+                    image: mainImagePlaceholder.imageProvider,
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.4),
+                      BlendMode.darken,
+                    ),
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 40),
-
-              // Services section
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                color: Colors.grey[300],
+                alignment: Alignment.center,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'خدمات شرکت پی آزما کاوان شالوده',
+                    const Text(
+                      'مهندسین مشاور پی آزما کاوان شالوده',
                       style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.blue[800],
+                        fontSize: 36,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    SizedBox(
-                      height: 400,
-                      child: GridView.count(
-                        crossAxisCount: 4,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        children: [
-                          _buildServiceCard(
-                              'مقاومت مصالح', 'assets/main/service4_6.png', ''),
-                          _buildServiceCard('آزمایش‌های بتن',
-                              'assets/main/service3_1.webp', ''),
-                          _buildServiceCard('آزمایشگاه محلی',
-                              'assets/main/service2.jpeg', ''),
-                          _buildServiceCard(
-                              'خدمات ژئوتکنیک', 'assets/main/service1.jpg', ''),
+                        shadows: [
+                          Shadow(
+                            blurRadius: 10.0,
+                            color: Colors.black,
+                            offset: Offset(5.0, 5.0),
+                          ),
                         ],
                       ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        scrollController.animateTo(
+                          scrollController.position.maxScrollExtent,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.easeInOut,
+                        );
+                        // Navigator.pushNamed(context, '/services');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 30,
+                          vertical: 15,
+                        ),
+                      ),
+                      child: const Text(
+                        'اطلاعات بیشتر',
+                        style: TextStyle(color: Colors.black87),
+                      ),
                     ),
                   ],
                 ),
               ),
+            ),
 
-              // const SizedBox(height: 40),
+            const SizedBox(height: 40),
 
-              // Why Choose Us section
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                // color: Colors.green[100],
-                // color: Colors.lightBlue[50],
-                color: Colors.grey[300],
-                child: Column(
-                  children: [
-                    Text(
-                      'چرا شرکت پی آزما کاوان شالوده؟',
+            // Services section
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              color: Colors.grey[300],
+              child: Column(
+                children: [
+                  Text(
+                    'خدمات شرکت پی آزما کاوان شالوده',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.blue[800],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  SizedBox(
+                    height: 400,
+                    child: GridView.count(
+                      crossAxisCount: 4,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      children: [
+                        _buildServiceCard(
+                            'مقاومت مصالح', 'assets/main/service4_6.png', ''),
+                        _buildServiceCard('آزمایش‌های بتن',
+                            'assets/main/service3_1.webp', ''),
+                        _buildServiceCard(
+                            'آزمایشگاه محلی', 'assets/main/service2.jpeg', ''),
+                        _buildServiceCard(
+                            'خدمات ژئوتکنیک', 'assets/main/service1.jpg', ''),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // const SizedBox(height: 40),
+
+            // Why Choose Us section
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              // color: Colors.green[100],
+              // color: Colors.lightBlue[50],
+              color: Colors.grey[300],
+              child: Column(
+                children: [
+                  Text(
+                    'چرا شرکت پی آزما کاوان شالوده؟',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.blue[800],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 120, right: 120),
+                    child: Text(
+                      companyDescriptionText,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black87,
+                        height: 2,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Clients section
+            Container(
+              width: double.infinity,
+              color: Colors.grey[300],
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'برخی از کارفرمایان ما',
                       style: TextStyle(
                         fontSize: 28,
                         color: Colors.blue[800],
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 120, right: 120),
-                      child: Text(
-                        companyDescriptionText,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black87,
-                          height: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                  const SizedBox(height: 20),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 400),
+                    child: Swiper(
+                      // key: UniqueKey(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  ImageWidgetPlaceholderWithImageProvider(
+                                    // key: UniqueKey(),
 
-              const SizedBox(height: 20),
-
-              // Clients section
-              Container(
-                width: double.infinity,
-                color: Colors.grey[300],
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        'برخی از کارفرمایان ما',
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.blue[800],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxHeight: 400),
-                      child: Swiper(
-                        // key: UniqueKey(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
+                                    image: AssetImage(
+                                        'assets/employers/${index + 1}.webp'),
+                                    placeholder: Container(
+                                      color: Colors.grey[50],
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.blue[300],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: [
+                                          Colors.blue[300]!.withOpacity(0.5),
+                                          Colors.transparent,
+                                        ],
+                                        stops: const [0.0, 0.7],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    ImageWidgetPlaceholderWithImageProvider(
-                                      // key: UniqueKey(),
-
-                                      image: AssetImage(
-                                          'assets/employers/${index + 1}.webp'),
-                                      placeholder: Container(
-                                        color: Colors.grey[50],
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.blue[300],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                            Colors.blue[300]!.withOpacity(0.5),
-                                            Colors.transparent,
-                                          ],
-                                          stops: const [0.0, 0.7],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
-                          );
-                        },
-                        autoplay: true,
-                        autoplayDelay: 5000,
-                        duration: 800,
-                        itemCount: 25,
-                        scale: 0.95,
-                        viewportFraction: 0.8,
-                        pagination: SwiperPagination(
-                          margin: const EdgeInsets.only(bottom: 30),
-                          builder: DotSwiperPaginationBuilder(
-                            color: Colors.grey[300],
-                            activeColor: Colors.blue[400],
-                            size: 10.0,
-                            activeSize: 12.0,
-                            space: 5.0,
                           ),
-                        ),
-                        control: SwiperControl(
-                          color: Colors.blue[400],
-                          disableColor: Colors.grey[300],
-                          padding: const EdgeInsets.all(20),
-                          iconPrevious: Icons.arrow_back_ios_rounded,
-                          iconNext: Icons.arrow_forward_ios_rounded,
+                        );
+                      },
+                      autoplay: true,
+                      autoplayDelay: 5000,
+                      duration: 800,
+                      itemCount: 25,
+                      scale: 0.95,
+                      viewportFraction: 0.8,
+                      pagination: SwiperPagination(
+                        margin: const EdgeInsets.only(bottom: 30),
+                        builder: DotSwiperPaginationBuilder(
+                          color: Colors.grey[300],
+                          activeColor: Colors.blue[400],
+                          size: 10.0,
+                          activeSize: 12.0,
+                          space: 5.0,
                         ),
                       ),
+                      control: SwiperControl(
+                        color: Colors.blue[400],
+                        disableColor: Colors.grey[300],
+                        padding: const EdgeInsets.all(20),
+                        iconPrevious: Icons.arrow_back_ios_rounded,
+                        iconNext: Icons.arrow_forward_ios_rounded,
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const FeaturesSection(),
-              const StatisticsSection(),
-              const SizedBox(height: 20),
-            ],
-          ),
-        ]),
-      ),
+            ),
+            const FeaturesSection(),
+            const StatisticsSection(),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ]),
     );
   }
 
