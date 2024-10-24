@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width; //1536
     final mainImagePlaceholder = ImageWidgetPlaceholderWithImageProvider(
       image: const AssetImage('assets/main/main_image.webp'),
       placeholder: Container(color: Colors.grey[300]),
@@ -35,7 +36,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Banner section
             Padding(
-              padding: const EdgeInsets.only(left: 130, right: 130),
+              padding: EdgeInsets.only(
+                  left: screenWidth * 0.084, right: screenWidth * 0.084),
               child: Container(
                 height: 440,
                 decoration: BoxDecoration(
@@ -208,7 +210,6 @@ class _HomePageState extends State<HomePage> {
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxHeight: 400),
                     child: Swiper(
-                      // key: UniqueKey(),
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
