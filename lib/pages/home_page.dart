@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.grey[300],
               child: Column(
                 children: [
-                  Text(
+                  SelectableText(
                     'چرا شرکت پی آزما کاوان شالوده؟',
                     style: TextStyle(
                       fontSize: 28,
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 20),
                   const Padding(
                     padding: EdgeInsets.only(left: 120, right: 120),
-                    child: Text(
+                    child: SelectableText(
                       companyDescriptionText,
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
+                    child: SelectableText(
                       'برخی از کارفرمایان ما',
                       style: TextStyle(
                         fontSize: 28,
