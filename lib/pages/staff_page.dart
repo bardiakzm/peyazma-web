@@ -37,31 +37,31 @@ class Staff extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 children: [
                   StaffCard(
-                    imagePath: 'staff/s1.webp',
-                    name: 'عطا اله کاظمی',
-                    title: 'مدیرعامل',
+                    imagePath: 'assets/staff/s1.webp',
+                    name: 'عطا اله کاظمی ایمن آبادی',
+                    title: 'رئیس هیئت مدیره',
                     email: 'atakzm@gmail.com',
                   ),
                   StaffCard(
-                    imagePath: 'staff/s2.webp',
+                    imagePath: 'assets/staff/s2.webp',
+                    name: 'مظفر پوریوسفی اباتری',
+                    title: 'عضو هییت مدیره',
+                    email: '',
+                  ),
+                  StaffCard(
+                    imagePath: 'assets/staff/s3.webp',
                     name: '',
                     title: '',
                     email: '',
                   ),
                   StaffCard(
-                    imagePath: 'staff/s3.webp',
+                    imagePath: 'assets/staff/s4.webp',
                     name: '',
                     title: '',
                     email: '',
                   ),
                   StaffCard(
-                    imagePath: 'staff/s4.webp',
-                    name: '',
-                    title: '',
-                    email: '',
-                  ),
-                  StaffCard(
-                    imagePath: 'staff/s5.webp',
+                    imagePath: 'assets/staff/s5.webp',
                     name: '',
                     title: '',
                     email: '',
