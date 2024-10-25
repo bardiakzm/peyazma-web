@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'image_placeholder.dart';
 
 class StaffCard extends StatelessWidget {
@@ -7,12 +6,14 @@ class StaffCard extends StatelessWidget {
   final String name;
   final String title;
   final String email;
+  final String degree;
 
   const StaffCard({
     required this.imagePath,
     required this.name,
     required this.title,
     this.email = '',
+    this.degree = '', // Added degree with default empty value
     super.key,
   });
 
@@ -20,7 +21,7 @@ class StaffCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      height: 412,
+      height: 452, // Increased height to accommodate degree
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -67,6 +68,18 @@ class StaffCard extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    if (degree.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        degree,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                     const SizedBox(height: 8),
                     Text(
                       title,
