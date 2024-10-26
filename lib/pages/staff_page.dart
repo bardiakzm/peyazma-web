@@ -54,7 +54,7 @@ class Staff extends StatelessWidget {
                   StaffCard(
                     imagePath: 'assets/staff/s3.webp',
                     name: 'سجاد کریمی',
-                    degree: 'مهندسی عمران',
+                    degree: 'کارشناسی مهندسی عمران',
                     title: 'کارشناس فنی پروژه ها',
                     email: '@gmail.com',
                   ),

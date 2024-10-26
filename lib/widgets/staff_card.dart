@@ -59,7 +59,7 @@ class StaffCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    SelectableText(
                       name,
                       style: const TextStyle(
                         fontSize: 20,
@@ -70,7 +70,7 @@ class StaffCard extends StatelessWidget {
                     ),
                     if (degree.isNotEmpty) ...[
                       const SizedBox(height: 8),
-                      Text(
+                      SelectableText(
                         degree,
                         style: TextStyle(
                           fontSize: 15,
@@ -81,7 +81,7 @@ class StaffCard extends StatelessWidget {
                       ),
                     ],
                     const SizedBox(height: 8),
-                    Text(
+                    SelectableText(
                       title,
                       style: TextStyle(
                         fontSize: 16,
