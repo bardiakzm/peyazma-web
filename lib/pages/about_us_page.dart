@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 import 'dart:ui_web';
 import 'package:peyazma_web/resources/bottom_page_information.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
     // Registering the iframeElement once in initState
     platformViewRegistry.registerViewFactory(
       'iframeElement',
-      (int viewId) => IFrameElement()
+      (int viewId) => html.IFrameElement()
         ..style.border = 'none'
         ..src =
             'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.9554804073694!2d51.25466741525996!3d35.68798868019381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQxJzE2LjgiTiA1McKwMTUnMjQuNyJF!5e0!3m2!1sen!2sus!4v1632901234567!5m2!1sen!2sus',
