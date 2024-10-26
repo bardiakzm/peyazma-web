@@ -40,7 +40,7 @@ class Staff extends StatelessWidget {
                   StaffCard(
                     imagePath: 'assets/staff/s1.webp',
                     name: 'عطا اله کاظمی ایمن آبادی',
-                    degree: 'دکتری مهندسی ژئومورفولوژی', // Add degree here
+                    degree: 'دکتری ژئومورفولوژی', // Add degree here
                     title: 'مدیر عامل و رئیس هیئت مدیره',
                     email: 'atakzm@gmail.com',
                   ),
@@ -48,7 +48,7 @@ class Staff extends StatelessWidget {
                     imagePath: 'assets/staff/s2.webp',
                     name: 'مظفر پوریوسفی اباتری',
                     degree: 'کارشناسی مهندسی عمران', // Add degree here
-                    title: 'عضو هییت مدیره و مدیر اجرایی',
+                    title: 'عضو هیئت مدیره و مدیر اجرایی',
                     email: '@gmail.com',
                   ),
                   StaffCard(
