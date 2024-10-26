@@ -359,7 +359,7 @@ class _OptionBarState extends State<OptionBar> {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16, color: Colors.white),
       ),
       onTap: () {
         context.go(route);
