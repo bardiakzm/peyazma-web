@@ -113,7 +113,9 @@ class _HomePageState extends State<HomePage> {
 
             // Services section
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: screenWidth * 0.026,
+                  horizontal: screenWidth * 0.013),
               color: Colors.grey[300],
               child: Column(
                 children: [
@@ -154,7 +156,9 @@ class _HomePageState extends State<HomePage> {
 
             // Why Choose Us section
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: screenWidth * 0.026,
+                  horizontal: screenWidth * 0.013),
               // color: Colors.green[100],
               // color: Colors.lightBlue[50],
               color: Colors.grey[300],
