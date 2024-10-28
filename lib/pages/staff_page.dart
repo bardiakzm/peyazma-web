@@ -49,21 +49,21 @@ class Staff extends StatelessWidget {
                     name: 'مظفر پوریوسفی اباتری',
                     degree: 'کارشناسی مهندسی عمران', // Add degree here
                     title: 'عضو هیئت مدیره و مدیر اجرایی',
-                    email: '@gmail.com',
+                    email: 'pouryousefi.mozafar@gmail.com',
                   ),
                   StaffCard(
                     imagePath: 'assets/staff/s3.webp',
                     name: 'سجاد کریمی',
                     degree: 'کارشناسی مهندسی عمران',
                     title: 'کارشناس فنی پروژه ها',
-                    email: '@gmail.com',
+                    email: 'sajjad.karimi.gh@gmail.com',
                   ),
                   StaffCard(
                     imagePath: 'assets/staff/s4.webp',
                     name: 'عاطفه صافی',
                     degree: 'کارشناسی ارشد مهندسی عمران خاک -پی',
                     title: 'مدیر فنی',
-                    email: '@gmail.com',
+                    email: 'safii.1373@gmail.com',
                   ),
                   StaffCard(
                     imagePath: 'assets/staff/s5.webp',
@@ -77,7 +77,7 @@ class Staff extends StatelessWidget {
                     name: 'ابوالفضل فرهاد کیایی',
                     degree: 'کارشناسی زمین شناسی',
                     title: 'کارشناس فنی',
-                    email: '@gmail.com',
+                    email: 'abolfazlkiaei615@gmail.com',
                   ),
                 ],
               ),

@@ -19,8 +19,6 @@ class _ContactUsState extends State<ContactUs> {
   void initState() {
     super.initState();
 
-    // Registering the iframeElement once in initState
-    // Use 'platformViewRegistry' without the 'ui' prefix
     platformViewRegistry.registerViewFactory(
       'iframeElement',
       (int viewId) => html.IFrameElement()
@@ -43,44 +41,33 @@ class _ContactUsState extends State<ContactUs> {
           ),
         ),
         child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1200),
-            child: Card(
-              elevation: 8,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SelectableText(
-                      'تماس با ما',
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                            color: Colors.blue.shade800,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 32),
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: _buildMapSection(context),
-                          ),
-                          const SizedBox(width: 32),
-                          Expanded(
-                            flex: 1,
-                            child: _buildContactDetailsSection(context),
-                          ),
-                        ],
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SelectableText(
+                        'تماس با ما',
+                        style:
+                            Theme.of(context).textTheme.displaySmall?.copyWith(
+                                  color: Colors.blue.shade800,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 32),
+                      _buildResponsiveLayout(context),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -88,6 +75,46 @@ class _ContactUsState extends State<ContactUs> {
         ),
       ),
     );
+  }
+
+  Widget _buildResponsiveLayout(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    bool isWideScreen = screenWidth > 900;
+
+    if (isWideScreen) {
+      // Wide screen layout with fixed height
+      return SizedBox(
+        height: screenHeight * 0.7, // 70% of screen height
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 1,
+              child: _buildMapSection(context),
+            ),
+            const SizedBox(width: 32),
+            Expanded(
+              flex: 1,
+              child: _buildContactDetailsSection(context),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Narrow screen layout (stacked)
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 300, // Fixed height for map on mobile
+            child: _buildMapSection(context),
+          ),
+          const SizedBox(height: 32),
+          _buildContactDetailsSection(context),
+        ],
+      );
+    }
   }
 
   Widget _buildMapSection(BuildContext context) {
@@ -186,11 +213,14 @@ class _ContactUsState extends State<ContactUs> {
             ),
           ),
           const SizedBox(width: 8),
-          SelectableText('$label:',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue.shade700)),
+          SelectableText(
+            '$label:',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade700,
+            ),
+          ),
           const SizedBox(width: 8),
           Icon(icon, color: Colors.blue.shade700),
         ],
