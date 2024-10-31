@@ -6,6 +6,8 @@ import 'package:peyazma_web/pages/home_page.dart';
 import 'package:peyazma_web/pages/projects_page.dart' deferred as projects;
 import 'package:peyazma_web/pages/services_page.dart' deferred as services;
 import 'package:peyazma_web/pages/staff_page.dart' deferred as staff;
+import 'package:peyazma_web/pages/organization_chart_page.dart'
+    deferred as organization_chart;
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
@@ -89,6 +91,22 @@ class AppRouter {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return services.ServicesPage();
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/organizationChart',
+        name: 'organizationChart',
+        builder: (context, state) {
+          return FutureBuilder(
+            future: organization_chart.loadLibrary(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return organization_chart.OrganizationChart();
               } else {
                 return const Center(child: CircularProgressIndicator());
               }
