@@ -42,7 +42,7 @@ dependencies:
   visibility_detector: ^0.4.0+2
   go_router: ^14.3.0
   flutter_native_splash: ^2.4.2
-  universal_html: ^2.2.4
+  web: ^1.1.0
 
 
 

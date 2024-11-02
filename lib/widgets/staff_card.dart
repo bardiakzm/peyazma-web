@@ -97,7 +97,7 @@ class StaffCard extends StatelessWidget {
                         children: [
                           Icon(Icons.email, size: 16, color: Colors.grey[600]),
                           const SizedBox(width: 8),
-                          Text(
+                          SelectableText(
                             email,
                             style: TextStyle(
                               fontSize: 14,
