@@ -13,7 +13,7 @@ class StaffCard extends StatelessWidget {
     required this.name,
     required this.title,
     this.email = '',
-    this.degree = '', // Added degree with default empty value
+    this.degree = '', 
     super.key,
   });
 
@@ -21,7 +21,7 @@ class StaffCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 300,
-      height: 452, // Increased height to accommodate degree
+      height: 452,
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
