@@ -43,6 +43,7 @@ dependencies:
   go_router: ^14.3.0
   flutter_native_splash: ^2.4.2
   web: ^1.1.0
+  graphview: ^1.2.0
 
 
 
