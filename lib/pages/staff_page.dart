@@ -79,6 +79,13 @@ class Staff extends StatelessWidget {
                     title: 'کارشناس فنی',
                     email: 'abolfazlkiaei615@gmail.com',
                   ),
+                  StaffCard(
+                    imagePath: 'assets/staff/s7.webp',
+                    name: 'اصغر صفرپور',
+                    degree: 'کارشناسی ارشد مهندسی عمران',
+                    title: 'کارشناس فنی پروژه ها',
+                    email: 'safarpour1359@gmail.com',
+                  ),
                 ],
               ),
             ],
