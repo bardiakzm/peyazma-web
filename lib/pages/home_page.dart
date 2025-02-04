@@ -154,8 +154,8 @@ class _HomePageState extends State<HomePage> {
                       height: screenWidth < 600
                           ? 1600
                           : screenWidth < 900
-                              ? 1000
-                              : 300,
+                              ? 1200
+                              : 400,
                       child: Wrap(
                         spacing: 20,
                         runSpacing: 20,
