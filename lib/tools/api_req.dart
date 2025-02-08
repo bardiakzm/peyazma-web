@@ -51,53 +51,36 @@ class Api {
   }
 
   static Future<void> getGeotechnicalProjects() async {
-    try {
-      final List<Map<String, String>> projects =
-          await Api.fetchFromDB('geotechnical_projects');
-      apiGeotechnicalProjects = projects;
-      print('Successfully fetched ${projects.length} projects');
-      for (var project in projects) {
-        print('\nProject: ${project['project']}');
-        print('Employer: ${project['employer']}');
-      }
-    } catch (e) {
-      print('Error: $e');
-      print('Stack trace:');
-      print(StackTrace.current);
-    }
+    final List<Map<String, String>> projects =
+        await Api.fetchFromDB('geotechnical_projects');
+    apiGeotechnicalProjects = projects;
+    // print('Successfully fetched ${projects.length} projects');
+    // for (var project in projects) {
+    //   print('\nProject: ${project['project']}');
+    //   print('Employer: ${project['employer']}');
+    // }
   }
 
   static Future<void> getQualityControlAndLocalUnitData() async {
-    try {
-      final List<Map<String, String>> projects =
-          await Api.fetchFromDB('quality_control_projects');
-      apiQualityControlAndLocalUnitData = projects;
-      print('Successfully fetched ${projects.length} projects');
-      for (var project in projects) {
-        print('\nProject: ${project['project']}');
-        print('Employer: ${project['employer']}');
-      }
-    } catch (e) {
-      print('Error: $e');
-      print('Stack trace:');
-      print(StackTrace.current);
-    }
+    final List<Map<String, String>> projects =
+        await Api.fetchFromDB('quality_control_projects');
+    apiQualityControlAndLocalUnitData = projects;
   }
 }
 
 Future<void> main() async {
-  try {
-    final List<Map<String, String>> projects =
-        await Api.fetchFromDB('quality_control_projects');
-    apiGeotechnicalProjects = projects;
-    print('Successfully fetched ${projects.length} projects');
-    for (var project in projects) {
-      print('\nProject: ${project['project']}');
-      print('Employer: ${project['employer']}');
-    }
-  } catch (e) {
-    print('Error: $e');
-    print('Stack trace:');
-    print(StackTrace.current);
-  }
+  // try {
+  final List<Map<String, String>> projects =
+      await Api.fetchFromDB('quality_control_projects');
+  apiGeotechnicalProjects = projects;
+  // print('Successfully fetched ${projects.length} projects');
+  // for (var project in projects) {
+  //   print('\nProject: ${project['project']}');
+  //   print('Employer: ${project['employer']}');
+  // }
+  // } catch (e) {
+  //   print('Error: $e');
+  //   print('Stack trace:');
+  //   print(StackTrace.current);
+  // }
 }
