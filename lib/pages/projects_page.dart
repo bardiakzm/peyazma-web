@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
-import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
+// import 'package:peyazma_web/resources/lists/geotechnical_projects_list.dart';
+// import 'package:peyazma_web/resources/lists/qaulity_control_and_local_unit_list.dart';
 import 'package:peyazma_web/widgets/option_bar.dart';
 import 'package:peyazma_web/resources/bottom_page_information.dart';
+import 'package:peyazma_web/tools/api_req.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -24,9 +25,14 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   void initState() {
     super.initState();
-    _qualityControlFuture =
-        Future.microtask(() => qualityControlAndLocalUnitData);
-    _geotechnicalProjectsFuture = Future.microtask(() => geotechnicalProjects);
+    Api.getGeotechnicalProjects();
+    Api.getQualityControlAndLocalUnitData();
+    _qualityControlFuture = Api.getGeotechnicalProjects().then((_) {
+      return apiQualityControlAndLocalUnitData;
+    });
+    _geotechnicalProjectsFuture = Api.getGeotechnicalProjects().then((_) {
+      return apiGeotechnicalProjects; // Ensure this contains the latest data
+    });
   }
 
   @override
