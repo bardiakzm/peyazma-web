@@ -69,18 +69,18 @@ class Api {
 }
 
 Future<void> main() async {
-  // try {
-  final List<Map<String, String>> projects =
-      await Api.fetchFromDB('quality_control_projects');
-  apiGeotechnicalProjects = projects;
-  // print('Successfully fetched ${projects.length} projects');
-  // for (var project in projects) {
-  //   print('\nProject: ${project['project']}');
-  //   print('Employer: ${project['employer']}');
-  // }
-  // } catch (e) {
-  //   print('Error: $e');
-  //   print('Stack trace:');
-  //   print(StackTrace.current);
-  // }
+  try {
+    final List<Map<String, String>> projects =
+        await Api.fetchFromDB('quality_control_projects');
+    apiGeotechnicalProjects = projects;
+    print('Successfully fetched ${projects.length} projects');
+    for (var project in projects) {
+      print('\nProject: ${project['project']}');
+      print('Employer: ${project['employer']}');
+    }
+  } catch (e) {
+    print('Error: $e');
+    print('Stack trace:');
+    print(StackTrace.current);
+  }
 }
